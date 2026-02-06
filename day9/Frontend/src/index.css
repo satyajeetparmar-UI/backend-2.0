@@ -29,3 +29,9 @@ html {
   max-width: 20rem;
   color: whitesmoke;
 }
+
+.create-notes-form {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
