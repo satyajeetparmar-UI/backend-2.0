@@ -43,18 +43,30 @@ function App() {
       description: description.value
     })
     .then(res => {
-      console.log(res.data);
-      fetchNotes()
-        
+      fetchNotes()        
     })
     
   }
 
   function handleDeleteNote(noteId) {
+
     axios.delete('http://localhost:3000/notes/'+noteId)
     .then(res => {
       fetchNotes()
     })
+
+  }
+
+  // we can update description from here 
+  function handleUpdateNote(noteId) {
+
+    const newDescription = prompt("Enter new description");
+
+    axios.patch('http://localhost:3000/notes/' + noteId, {description: newDescription})
+    .then(res => {
+      fetchNotes()
+    })
+
   }
 
   return (
@@ -71,6 +83,7 @@ function App() {
             <h1>{note.title}</h1>
               <p>{note.description}</p>
               <button onClick={()=>{handleDeleteNote(note._id)}}>Delete</button>
+              <button onClick={()=>{handleUpdateNote(note._id)}}>Update</button>
           </div>
           })
         }
