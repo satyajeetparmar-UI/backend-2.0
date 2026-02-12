@@ -1,6 +1,7 @@
 const express = require('express')
 const userModel = require('../models/user.model')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 
 const authRouter = express.Router()
 
@@ -15,8 +16,13 @@ authRouter.post("/register", async (req, res) => {
     })
   }
 
+  /**
+   * password ko hash me change krne ka liye ye method ka use krte hai
+   */
+  const hash = crypto.createHash("md5").update(password).digest("hex")
+
   const user = await userModel.create({
-    email, name, password
+    email, name, password: hash
   })
 
   const token = jwt.sign(
@@ -59,7 +65,12 @@ authRouter.post("/login", async (req, res) => {
     })
   }
 
-  const isPasswordCorrect = user.password === password
+
+  /**
+   * - Jab user password dalta hai login ke liye to phir password phir se hash me change hota hai and hash match hota hai uske baad user login krta hai 
+   * - agar hash match nahi hua mtlb password incorrect hai.
+   */
+  const isPasswordCorrect = user.password === crypto.createHash("md5").update(password).digest("hex")
 
   if (!isPasswordCorrect) {
     return res.status(401).json({
