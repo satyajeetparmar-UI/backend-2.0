@@ -27,6 +27,14 @@ authRouter.post("/register", async (req, res) => {
       process.env.JWT_SECRET
   )
 
+  res.cookie("jwt_token", token, {
+    // Save token in cookie
+    httpOnly: true,
+    secure: false, // true in production (HTTPS)
+    sameSite: "strict",
+    maxAge:  7 * 24 * 60 * 60 * 1000
+  })
+
   res.status(201).json({
     message: "User registered",
     user,
