@@ -14,7 +14,6 @@ dist-ssr
 .env
 .env.local
 .env.*.local
-
 echo ".env" >> .gitignore
 
 
@@ -28,3 +27,4 @@ echo ".env" >> .gitignore
 *.njsproj
 *.sln
 *.sw?
+.env
