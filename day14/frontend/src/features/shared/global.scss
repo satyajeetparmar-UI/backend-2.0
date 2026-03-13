@@ -1,0 +1,24 @@
+@use "./button.scss";
+
+* {
+  box-sizing: border-box; 
+}
+
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+body, #root {
+  background-color: #121212;
+  color: aliceblue;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #1db7dd;
+  text-decoration: none;
+}
